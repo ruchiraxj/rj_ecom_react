@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+h6.nav-link{
+  cursor: pointer;
+}
+h6.nav-link.active{
+  color:#1A01CC;
+  font-weight: 700;
+}
