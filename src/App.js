@@ -10,6 +10,7 @@ import {
   addToCart,
   getCart,
   removeFromCart,
+  addDiscount
 } from "./services/ShoppingCartService";
 
 class App extends Component {
@@ -68,6 +69,16 @@ class App extends Component {
     }
   }
 
+  //API call - Add Discount Code
+  async addDiscount(code) {
+    try{
+      const c = await addDiscount(code);
+      this.setState({ cart: c.data });
+    }catch{
+
+    }
+  }
+
   //Handle method when user click on a category from left menu
   handleCategoryClick = (id) => {
     this.setState({ selectedCategory: id });
@@ -82,6 +93,13 @@ class App extends Component {
   //Handle method when user click on add to cart button
   handleBookRemoveFromCart = (id) => {
     this.removeFromCart(id);
+  };
+  
+  //Handle method when user click on add to cart button
+  hangleDiscountAdd = (code) => {
+    if(code.length >= 3 || code == ""){
+      this.addDiscount(code);
+    }
   };
 
   render() {
@@ -107,6 +125,7 @@ class App extends Component {
               <ShoppingCart
                 cartItems={this.state.cart}
                 onDelete={this.handleBookRemoveFromCart}
+                onDiscountAdd={this.hangleDiscountAdd}
               />
             </div>
           </div>

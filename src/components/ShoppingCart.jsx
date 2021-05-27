@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 class ShoppingCart extends Component {
-  state = {};
+  state = {
+    discount_code: "",
+  };
 
   refreshShoppingCart = (props) => {
     const { items } = props.cartItems;
@@ -32,12 +34,22 @@ class ShoppingCart extends Component {
   refreshSum = (props) => {
     const { sum } = props.cartItems;
 
-    console.log(sum);
     return (
       <React.Fragment>
         <tr>
           <td colSpan="4">Sub Total</td>
           <td className="text-right">${sum.subTotal}</td>
+        </tr>
+        <tr>
+          <td colSpan="2">Coupoun</td>
+          <td colSpan="3">
+            <input
+              placeholder={sum.code}
+              className="form-control"
+              type="textbox"
+              onChange={(event) => props.onDiscountAdd(event.target.value)}
+            ></input>
+          </td>
         </tr>
         <tr>
           <td colSpan="4">Discount</td>
@@ -54,26 +66,43 @@ class ShoppingCart extends Component {
   };
 
   render() {
-    
-    if (this.props.cartItems === undefined || this.props.cartItems.items === undefined || this.props.cartItems.items.length < 1) {
-      return <h3 className="text-center">Your Cart Is Empty<br/><i className="fa fa-shopping-cart"></i></h3>;
+    if (
+      this.props.cartItems === undefined ||
+      this.props.cartItems.items === undefined ||
+      this.props.cartItems.items.length < 1
+    ) {
+      return (
+        <h3 className="text-center">
+          Your Cart Is Empty
+          <br />
+          <i className="fa fa-shopping-cart"></i>
+        </h3>
+      );
     }
-   
+
     return (
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col">Title</th>
-            <th scope="col">Price</th>
-            <th scope="col">Qty</th>
-            <th scope="col">Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.refreshShoppingCart(this.props)}{this.refreshSum(this.props)}
-        </tbody>
-      </table>
+      <React.Fragment>
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Title</th>
+              <th scope="col">Price</th>
+              <th scope="col">Qty</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.refreshShoppingCart(this.props)}
+            {this.refreshSum(this.props)}
+          </tbody>
+        </table>
+        <div className="row">
+          <button type="button" className="col-12 btn btn-warning mt-0">
+            <i className="fa fa-shopping-cart"></i> Proceed To Checkout
+          </button>
+        </div>
+      </React.Fragment>
     );
   }
 }
