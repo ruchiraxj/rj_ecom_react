@@ -12,8 +12,8 @@ class Books extends Component {
         >
           <img src="https://via.placeholder.com/150x200" alt="book cover"></img>
           <h5>{book.title}</h5>
-          <p className="m-0">by: {book.author}</p>
-          <p className="m-0">isbn: {book.isbn}</p>
+          <p className="m-0">Author: {book.author}</p>
+          <p className="m-0">ISBN: {book.isbn}</p>
           <h6 className="mt-3">$ {book.price}.00</h6>
           <div className="row">
             <div className="col-12">

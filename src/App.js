@@ -50,7 +50,11 @@ class App extends Component {
   //API call - Add a book to the cart
   async addToCart(id) {
     const c = await addToCart(id);
-    this.setState({ cart: c.data });
+    try{
+      this.setState({ cart: c.data });
+    }catch(ex){
+      
+    }
   }
 
   //API call - Add a book to the cart

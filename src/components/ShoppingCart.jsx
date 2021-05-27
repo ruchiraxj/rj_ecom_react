@@ -98,7 +98,7 @@ class ShoppingCart extends Component {
           </tbody>
         </table>
         <div className="row">
-          <button type="button" className="col-12 btn btn-warning mt-0">
+          <button type="button" className="col-12 btn btn-danger mt-0">
             <i className="fa fa-shopping-cart"></i> Proceed To Checkout
           </button>
         </div>
