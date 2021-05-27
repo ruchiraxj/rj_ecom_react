@@ -1,5 +1,5 @@
 import http from "./httpService";
 
 export function getBooks(id){
-    return http.get(`http://localhost/personal/rj_ecom_symfony/public/index.php/books/list?category=${id}`);
+    return http.get(`${process.env.REACT_APP_API_PATH}/books/list?category=${id}`);
 }

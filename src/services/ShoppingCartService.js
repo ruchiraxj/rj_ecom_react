@@ -1,9 +1,13 @@
 import http from "./httpService";
 
 export function addToCart(id){
-   return http.get(`http://localhost/personal/rj_ecom_symfony/public/index.php/cart/add?id=${id}`, {withCredentials: true});
+   return http.get(`${process.env.REACT_APP_API_PATH}/cart/add?id=${id}`, {withCredentials: true});
 }
 
 export function getCart(){
-   return http.get(`http://localhost/personal/rj_ecom_symfony/public/index.php/cart/get`, {withCredentials: true});
+   return http.get(`${process.env.REACT_APP_API_PATH}/cart/get`, {withCredentials: true});
+}
+
+export function removeFromCart(id){
+   return http.get(`${process.env.REACT_APP_API_PATH}/cart/delete?id=${id}`, {withCredentials: true});
 }

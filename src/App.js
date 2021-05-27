@@ -6,14 +6,18 @@ import Books from "./components/Books";
 import { getCategories } from "./services/CategoriesService";
 import { getBooks } from "./services/BooksService";
 import ShoppingCart from "./components/ShoppingCart";
-import {addToCart, getCart} from "./services/ShoppingCartService";
+import {
+  addToCart,
+  getCart,
+  removeFromCart,
+} from "./services/ShoppingCartService";
 
 class App extends Component {
   state = {
-    categories: {},
+    categories: [],
     selectedCategory: 1,
-    books: {},
-    cart: [{ id: 1 }],
+    books: [],
+    cart: [],
   };
 
   componentDidMount() {
@@ -24,26 +28,44 @@ class App extends Component {
 
   //API call to fetch categories
   async fetchCategories() {
-    const categories = await getCategories();
-    this.setState({ categories: categories.data });
+    try{
+      const categories = await getCategories();
+      this.setState({ categories: categories.data });
+    }catch(ex){
+      
+    }
   }
 
   //API call to fetch books under the category
   async fetchBooks(id) {
-    const books = await getBooks(id);
-    this.setState({ books: books.data });
+    try{
+      const books = await getBooks(id);
+      this.setState({ books: books.data });
+    }catch(ex){
+
+    }
   }
 
   //API call - Add a book to the cart
   async addToCart(id) {
     const c = await addToCart(id);
-    this.setState({cart : c.data});
+    this.setState({ cart: c.data });
+  }
+
+  //API call - Add a book to the cart
+  async removeFromCart(id) {
+    const c = await removeFromCart(id);
+    this.setState({ cart: c.data });
   }
 
   //API call - Get Cart Content
   async getCart() {
-    const c = await getCart();
-    this.setState({cart : c.data});
+    try{
+      const c = await getCart();
+      this.setState({ cart: c.data });
+    }catch{
+
+    }
   }
 
   //Handle method when user click on a category from left menu
@@ -55,6 +77,11 @@ class App extends Component {
   //Handle method when user click on add to cart button
   handleBookAddToCart = (id) => {
     this.addToCart(id);
+  };
+
+  //Handle method when user click on add to cart button
+  handleBookRemoveFromCart = (id) => {
+    this.removeFromCart(id);
   };
 
   render() {
@@ -77,7 +104,10 @@ class App extends Component {
               />
             </div>
             <div className="col-12 col-md-3">
-              <ShoppingCart cartItems={this.state.cart} />
+              <ShoppingCart
+                cartItems={this.state.cart}
+                onDelete={this.handleBookRemoveFromCart}
+              />
             </div>
           </div>
         </div>

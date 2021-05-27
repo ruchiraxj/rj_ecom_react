@@ -20,6 +20,10 @@ class Categories extends Component {
     return list;
   };
   render() {
+    if(this.props.categories === undefined || this.props.categories.length < 1){
+      return '';
+    }
+
     return (
       <ul className="nav flex-column">
         <li className="nav-item">

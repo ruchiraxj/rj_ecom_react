@@ -1,5 +1,5 @@
 import http from "./httpService";
 
 export function getCategories(){
-    return http.get("http://localhost/personal/rj_ecom_symfony/public/index.php/category/list");
+    return http.get(`${process.env.REACT_APP_API_PATH}/category/list`);
 }
