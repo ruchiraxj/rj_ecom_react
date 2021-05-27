@@ -41,7 +41,7 @@ class ShoppingCart extends Component {
           <td className="text-right">${sum.subTotal}</td>
         </tr>
         <tr>
-          <td colSpan="2">Coupoun</td>
+          <td colSpan="2">Coupon</td>
           <td colSpan="3">
             <input
               placeholder={sum.code}
